@@ -24,5 +24,5 @@ yarn run start
 
 👤 **Manuel Martin**
 
-- Website: https://manuelmartin.name
+- Website: https://manuelmartin.dev
 - Github: [@manuelmartin-developer](https://github.com/manuelmartin-developer)
