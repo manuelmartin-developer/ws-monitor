@@ -106,7 +106,7 @@ wsServer.on("connection", (socket) => {
           available: fsSize[0].available / 1024 / 1024 / 1024
         };
         socket.send(`DISK: ${JSON.stringify(fsSizeData)}`);
-      }, 300000);
+      }, 1000);
     }
   });
   socket.send("Connected to WS server");
