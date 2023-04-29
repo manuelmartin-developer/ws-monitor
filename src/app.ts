@@ -2,7 +2,7 @@ require("dotenv").config();
 import express, { Application, Request, Response, NextFunction } from "express";
 import { WebSocketServer } from "ws";
 import morgan from "morgan";
-import { log, black, white, cyan } from "console-log-colors";
+import { log, black, cyan } from "console-log-colors";
 import cors from "cors";
 import si from "systeminformation";
 
@@ -106,7 +106,7 @@ wsServer.on("connection", (socket) => {
           available: fsSize[0].available / 1024 / 1024 / 1024
         };
         socket.send(`DISK: ${JSON.stringify(fsSizeData)}`);
-      }, 1000);
+      }, 300000);
     }
   });
   socket.send("Connected to WS server");
