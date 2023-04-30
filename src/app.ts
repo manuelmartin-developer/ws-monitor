@@ -70,6 +70,15 @@ wsServer.on("connection", (socket) => {
       RAMInterval && clearInterval(RAMInterval);
       DISKInterval && clearInterval(DISKInterval);
 
+      si.currentLoad().then((cpu) => {
+        const cpuData = {
+          avgLoad: cpu.avgLoad,
+          currentLoad: cpu.currentLoad,
+          currentLoadIdle: cpu.currentLoadIdle
+        };
+        socket.send(`CPU: ${JSON.stringify(cpuData)}`);
+      });
+
       CPUInterval = setInterval(async () => {
         const cpu = await si.currentLoad();
         const cpuData = {
@@ -98,6 +107,14 @@ wsServer.on("connection", (socket) => {
     if (message.toString() === "DISK") {
       CPUInterval && clearInterval(CPUInterval);
       RAMInterval && clearInterval(RAMInterval);
+
+      si.fsSize().then((fsSize) => {
+        const fsSizeData = {
+          size: fsSize[0].size / 1024 / 1024 / 1024,
+          available: fsSize[0].available / 1024 / 1024 / 1024
+        };
+        socket.send(`DISK: ${JSON.stringify(fsSizeData)}`);
+      });
 
       DISKInterval = setInterval(async () => {
         const fsSize = await si.fsSize();
