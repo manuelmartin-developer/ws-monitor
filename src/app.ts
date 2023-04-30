@@ -78,7 +78,7 @@ wsServer.on("connection", (socket) => {
           currentLoadIdle: cpu.currentLoadIdle
         };
         socket.send(`CPU: ${JSON.stringify(cpuData)}`);
-      }, 1000);
+      }, 60000); // 1 minute
     }
     if (message.toString() === "RAM") {
       CPUInterval && clearInterval(CPUInterval);
@@ -92,7 +92,7 @@ wsServer.on("connection", (socket) => {
           available: mem.available / 1024 / 1024 / 1024
         };
         socket.send(`RAM: ${JSON.stringify(memData)}`);
-      }, 1000);
+      }, 1000); // 1 second
     }
 
     if (message.toString() === "DISK") {
@@ -106,7 +106,7 @@ wsServer.on("connection", (socket) => {
           available: fsSize[0].available / 1024 / 1024 / 1024
         };
         socket.send(`DISK: ${JSON.stringify(fsSizeData)}`);
-      }, 1000);
+      }, 300000); // 5 minutes
     }
   });
   socket.send("Connected to WS server");
